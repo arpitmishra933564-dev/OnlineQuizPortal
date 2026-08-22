@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Dashboard - QuizMaster</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<header>
+
+    <nav class="navbar">
+
+        <div class="logo">
+            Quiz<span>Master</span>
+        </div>
+
+        <ul class="nav-links">
+
+            <li>
+                <a href="{{ url_for('home') }}">
+                    Home
+                </a>
+            </li>
+
+            <li>
+                <a href="{{ url_for('logout') }}">
+                    Logout
+                </a>
+            </li>
+
+        </ul>
+
+    </nav>
+
+</header>
+
+
+<!-- ================= DASHBOARD ================= -->
+
+<section class="dashboard">
+
+    <div class="dashboard-content">
+
+        <p class="small-heading">
+            QUIZMASTER DASHBOARD
+        </p>
+
+        <h1>
+            Welcome,
+            <span>{{ user_name }}</span> 👋
+        </h1>
+
+        <p class="dashboard-text">
+            Track your performance and choose your next quiz.
+        </p>
+
+
+        <!-- ================= STATISTICS ================= -->
+
+        <div class="stats-container">
+
+
+            <!-- TOTAL QUIZZES -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    📝
+                </div>
+
+                <h3>
+                    Total Quizzes
+                </h3>
+
+                <strong>
+                    {{ total_quizzes }}
+                </strong>
+
+            </div>
+
+
+            <!-- BEST SCORE -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    🏆
+                </div>
+
+                <h3>
+                    Best Score
+                </h3>
+
+                <strong>
+                    {{ best_score }}%
+                </strong>
+
+            </div>
+
+
+            <!-- AVERAGE SCORE -->
+
+            <div class="stat-card">
+
+                <div class="stat-icon">
+                    📊
+                </div>
+
+                <h3>
+                    Average Score
+                </h3>
+
+                <strong>
+                    {{ average_score }}%
+                </strong>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- ================= QUIZ CATEGORIES ================= -->
+
+        <h2 class="dashboard-heading">
+            Choose Your Quiz
+        </h2>
+
+
+        <div class="dashboard-grid">
+
+
+            <!-- PROGRAMMING -->
+
+            <div class="dashboard-card">
+
+                <div class="dashboard-icon">
+                    💻
+                </div>
+
+                <h2>
+                    Programming
+                </h2>
+
+                <p>
+                    C, C++, Python & Java
+                </p>
+
+                <a
+                    href="{{ url_for('quiz', category='Programming') }}"
+                    class="dashboard-btn">
+
+                    Start Quiz →
+
+                </a>
+
+            </div>
+
+
+            <!-- DATA STRUCTURES -->
+
+            <div class="dashboard-card">
+
+                <div class="dashboard-icon">
+                    🗄️
+                </div>
+
+                <h2>
+                    Data Structures
+                </h2>
+
+                <p>
+                    Array, Stack, Queue & Linked List
+                </p>
+
+                <a
+                    href="{{ url_for('quiz', category='Data Structures') }}"
+                    class="dashboard-btn">
+
+                    Start Quiz →
+
+                </a>
+
+            </div>
+
+
+            <!-- WEB DEVELOPMENT -->
+
+            <div class="dashboard-card">
+
+                <div class="dashboard-icon">
+                    🌐
+                </div>
+
+                <h2>
+                    Web Development
+                </h2>
+
+                <p>
+                    HTML, CSS & JavaScript
+                </p>
+
+                <a
+                    href="{{ url_for('quiz', category='Web Development') }}"
+                    class="dashboard-btn">
+
+                    Start Quiz →
+
+                </a>
+
+            </div>
+
+
+            <!-- APTITUDE -->
+
+            <div class="dashboard-card">
+
+                <div class="dashboard-icon">
+                    🧮
+                </div>
+
+                <h2>
+                    Aptitude
+                </h2>
+
+                <p>
+                    Maths, Logic & Reasoning
+                </p>
+
+                <a
+                    href="{{ url_for('quiz', category='Aptitude') }}"
+                    class="dashboard-btn">
+
+                    Start Quiz →
+
+                </a>
+
+            </div>
+
+
+        </div>
+
+
+        <!-- ================= QUIZ HISTORY ================= -->
+
+        <h2 class="dashboard-heading">
+            Quiz History
+        </h2>
+
+
+        {% if results %}
+
+        <div class="history-container">
+
+            <table class="history-table">
+
+                <thead>
+
+                    <tr>
+
+                        <th>
+                            Category
+                        </th>
+
+                        <th>
+                            Score
+                        </th>
+
+                        <th>
+                            Percentage
+                        </th>
+
+                        <th>
+                            Date
+                        </th>
+
+                    </tr>
+
+                </thead>
+
+
+                <tbody>
+
+                {% for result in results %}
+
+                    <tr>
+
+                        <td>
+                            {{ result["category"] }}
+                        </td>
+
+                        <td>
+
+                            {{ result["score"] }}
+                            /
+                            {{ result["total_questions"] }}
+
+                        </td>
+
+
+                        <td>
+
+                            {% if result["total_questions"] > 0 %}
+
+                                {{
+                                    (
+                                        result["score"]
+                                        /
+                                        result["total_questions"]
+                                        * 100
+                                    ) | round(0)
+                                }}%
+
+                            {% else %}
+
+                                0%
+
+                            {% endif %}
+
+                        </td>
+
+
+                        <td>
+                            {{ result["date"] }}
+                        </td>
+
+                    </tr>
+
+                {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+
+        {% else %}
+
+            <div class="no-history">
+
+                <p>
+                    You haven't attempted any quiz yet.
+                </p>
+
+                <p>
+                    Start your first quiz above! 🚀
+                </p>
+
+            </div>
+
+        {% endif %}
+
+
+    </div>
+
+</section>
+
+
+</body>
+
+</html>

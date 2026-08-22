@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>QuizMaster - Online Quiz Portal</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<!-- ================= NAVBAR ================= -->
+
+<header>
+
+    <nav class="navbar">
+
+        <div class="logo">
+            Quiz<span>Master</span>
+        </div>
+
+        <ul class="nav-links">
+
+            <li>
+                <a href="{{ url_for('home') }}">
+                    Home
+                </a>
+            </li>
+
+            <li>
+                <a href="#categories">
+                    Categories
+                </a>
+            </li>
+
+            <li>
+                <a href="#about">
+                    About
+                </a>
+            </li>
+
+            <li>
+                <a href="{{ url_for('login') }}">
+                    Login
+                </a>
+            </li>
+
+            <li>
+                <a href="{{ url_for('register') }}"
+                   class="register-btn">
+                    Register
+                </a>
+            </li>
+
+        </ul>
+
+    </nav>
+
+</header>
+
+
+<!-- ================= HERO ================= -->
+
+<section class="hero">
+
+    <div class="hero-content">
+
+        <p class="small-heading">
+            WELCOME TO QUIZMASTER
+        </p>
+
+        <h1>
+            Test Your Knowledge.
+            <span>Challenge Yourself.</span>
+        </h1>
+
+        <p class="hero-text">
+
+            Improve your knowledge, take exciting quizzes,
+            track your performance and compete with others.
+
+        </p>
+
+        <div class="hero-buttons">
+
+            <a href="#categories"
+               class="start-btn">
+
+                Start Quiz →
+
+            </a>
+
+            <a href="#about"
+               class="learn-btn">
+
+                Learn More
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- QUIZ CARD -->
+
+    <div class="quiz-card">
+
+        <div class="card-top">
+
+            <span>🧠</span>
+
+            <span>Quiz Time</span>
+
+        </div>
+
+
+        <h2>
+            Ready to test yourself?
+        </h2>
+
+
+        <div class="card-info">
+
+            <div>
+
+                <strong>10</strong>
+
+                <small>
+                    Questions
+                </small>
+
+            </div>
+
+
+            <div>
+
+                <strong>10</strong>
+
+                <small>
+                    Minutes
+                </small>
+
+            </div>
+
+
+            <div>
+
+                <strong>100</strong>
+
+                <small>
+                    Points
+                </small>
+
+            </div>
+
+        </div>
+
+
+        <a href="#categories"
+           class="start-btn"
+           style="display:block;text-align:center;">
+
+            Start Now
+
+        </a>
+
+    </div>
+
+</section>
+
+
+<!-- ================= CATEGORIES ================= -->
+
+<section id="categories"
+         class="categories">
+
+    <div class="section-title">
+
+        <p>EXPLORE</p>
+
+        <h2>
+            Quiz Categories
+        </h2>
+
+        <span>
+            Choose a category and start testing your knowledge.
+        </span>
+
+    </div>
+
+
+    <div class="category-container">
+
+
+        <!-- PROGRAMMING -->
+
+        <div class="category-card">
+
+            <div class="icon">
+                💻
+            </div>
+
+            <h3>
+                Programming
+            </h3>
+
+            <p>
+                C, C++, Python & Java
+            </p>
+
+            <a href="{{ url_for('quiz', category='Programming') }}">
+                Start Quiz →
+            </a>
+
+        </div>
+
+
+        <!-- DATA STRUCTURES -->
+
+        <div class="category-card">
+
+            <div class="icon">
+                🗄️
+            </div>
+
+            <h3>
+                Data Structures
+            </h3>
+
+            <p>
+                Array, Stack, Queue & Linked List
+            </p>
+
+            <a href="{{ url_for('quiz', category='Data Structures') }}">
+                Start Quiz →
+            </a>
+
+        </div>
+
+
+        <!-- WEB DEVELOPMENT -->
+
+        <div class="category-card">
+
+            <div class="icon">
+                🌐
+            </div>
+
+            <h3>
+                Web Development
+            </h3>
+
+            <p>
+                HTML, CSS & JavaScript
+            </p>
+
+            <a href="{{ url_for('quiz', category='Web Development') }}">
+                Start Quiz →
+            </a>
+
+        </div>
+
+
+        <!-- APTITUDE -->
+
+        <div class="category-card">
+
+            <div class="icon">
+                🧮
+            </div>
+
+            <h3>
+                Aptitude
+            </h3>
+
+            <p>
+                Maths, Logic & Reasoning
+            </p>
+
+            <a href="{{ url_for('quiz', category='Aptitude') }}">
+                Start Quiz →
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= ABOUT ================= -->
+
+<section id="about"
+         class="about">
+
+    <div>
+
+        <p class="small-heading">
+            WHY QUIZMASTER?
+        </p>
+
+        <h2>
+            Learn. Practice.
+            <span>Improve.</span>
+        </h2>
+
+        <p>
+
+            QuizMaster helps students practice their technical
+            and academic knowledge through interactive quizzes.
+
+        </p>
+
+
+        <div class="features">
+
+            <div>
+                <strong>✓</strong>
+                Instant Results
+            </div>
+
+            <div>
+                <strong>✓</strong>
+                Multiple Categories
+            </div>
+
+            <div>
+                <strong>✓</strong>
+                Performance Tracking
+            </div>
+
+            <div>
+                <strong>✓</strong>
+                Timed Quizzes
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- ================= FOOTER ================= -->
+
+<footer>
+
+    <div class="logo">
+        Quiz<span>Master</span>
+    </div>
+
+    <p>
+        © 2026 QuizMaster. Online Quiz Portal.
+    </p>
+
+</footer>
+
+</body>
+
+</html>

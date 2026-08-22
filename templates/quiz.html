@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>{{ category }} Quiz - QuizMaster</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<header>
+
+    <nav class="navbar">
+
+        <div class="logo">
+            Quiz<span>Master</span>
+        </div>
+
+        <ul class="nav-links">
+
+            <li>
+                <a href="{{ url_for('home') }}">
+                    Home
+                </a>
+            </li>
+
+            <li>
+                <a href="{{ url_for('logout') }}">
+                    Logout
+                </a>
+            </li>
+
+        </ul>
+
+    </nav>
+
+</header>
+
+
+<section class="quiz-section">
+
+    <div class="quiz-container">
+
+        <h1>
+            {{ category }} Quiz
+        </h1>
+
+        <p>
+            Answer all questions carefully.
+        </p>
+
+
+        <form method="POST"
+              action="{{ url_for('submit_quiz') }}">
+
+
+            <!-- CATEGORY -->
+
+            <input type="hidden"
+                   name="category"
+                   value="{{ category }}">
+
+
+            <!-- QUESTIONS -->
+
+            {% for question in questions %}
+
+            <div class="question-card">
+
+                <h3>
+
+                    Q{{ loop.index }}.
+
+                    {{ question["question"] }}
+
+                </h3>
+
+
+                <label class="option">
+
+                    <input
+                        type="radio"
+                        name="question_{{ question['id'] }}"
+                        value="A"
+                        required
+                    >
+
+                    {{ question["option_a"] }}
+
+                </label>
+
+
+                <label class="option">
+
+                    <input
+                        type="radio"
+                        name="question_{{ question['id'] }}"
+                        value="B"
+                    >
+
+                    {{ question["option_b"] }}
+
+                </label>
+
+
+                <label class="option">
+
+                    <input
+                        type="radio"
+                        name="question_{{ question['id'] }}"
+                        value="C"
+                    >
+
+                    {{ question["option_c"] }}
+
+                </label>
+
+
+                <label class="option">
+
+                    <input
+                        type="radio"
+                        name="question_{{ question['id'] }}"
+                        value="D"
+                    >
+
+                    {{ question["option_d"] }}
+
+                </label>
+
+            </div>
+
+            {% endfor %}
+
+
+            <button type="submit"
+                    class="submit-quiz-btn">
+
+                Submit Quiz
+
+            </button>
+
+
+        </form>
+
+    </div>
+
+</section>
+
+</body>
+
+</html>

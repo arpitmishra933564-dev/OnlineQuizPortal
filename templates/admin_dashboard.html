@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Dashboard - QuizMaster</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #f4f6f9;
+        }
+
+        /* NAVBAR */
+        .navbar {
+            background: #222;
+            color: white;
+            padding: 18px 30px;
+
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar h2 {
+            font-size: 24px;
+        }
+
+        .admin-name {
+            margin-right: 15px;
+        }
+
+        .logout {
+            background: #e74c3c;
+            color: white;
+            text-decoration: none;
+
+            padding: 10px 18px;
+            border-radius: 5px;
+        }
+
+        .logout:hover {
+            background: #c0392b;
+        }
+
+
+        /* MAIN CONTAINER */
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 30px auto;
+        }
+
+
+        /* WELCOME */
+
+        .welcome {
+            background: white;
+            padding: 25px;
+
+            border-radius: 10px;
+            margin-bottom: 25px;
+
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .welcome h1 {
+            margin-bottom: 10px;
+            color: #222;
+        }
+
+        .welcome p {
+            color: #666;
+        }
+
+
+        /* CARDS */
+
+        .cards {
+            display: grid;
+
+            grid-template-columns:
+                repeat(auto-fit, minmax(220px, 1fr));
+
+            gap: 20px;
+        }
+
+        .card {
+            background: white;
+
+            padding: 30px;
+
+            border-radius: 10px;
+
+            text-align: center;
+
+            box-shadow:
+                0 3px 10px rgba(0,0,0,0.1);
+
+            transition: 0.3s;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+        }
+
+        .card h2 {
+            font-size: 40px;
+            color: #3498db;
+
+            margin-bottom: 10px;
+        }
+
+        .card p {
+            font-size: 18px;
+            color: #555;
+        }
+
+
+        /* ACTIONS */
+
+        .actions {
+            background: white;
+
+            margin-top: 30px;
+
+            padding: 25px;
+
+            border-radius: 10px;
+
+            box-shadow:
+                0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .actions h2 {
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            display: inline-block;
+
+            padding: 12px 20px;
+
+            margin-right: 10px;
+            margin-bottom: 10px;
+
+            background: #3498db;
+
+            color: white;
+
+            text-decoration: none;
+
+            border-radius: 5px;
+        }
+
+        .btn:hover {
+            background: #2980b9;
+        }
+
+        .settings {
+            background: #8e44ad;
+        }
+
+        .settings:hover {
+            background: #71368a;
+        }
+
+
+        /* MOBILE */
+
+        @media (max-width: 600px) {
+
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+                text-align: center;
+            }
+
+            .container {
+                width: 95%;
+            }
+
+            .btn {
+                display: block;
+                text-align: center;
+                margin-right: 0;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+
+    <!-- ================= NAVBAR ================= -->
+
+    <div class="navbar">
+
+        <h2>QuizMaster Admin</h2>
+
+        <div>
+
+            <span class="admin-name">
+                Welcome, {{ username }}
+            </span>
+
+            <a href="{{ url_for('admin_logout') }}" class="logout">
+                Logout
+            </a>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- ================= MAIN ================= -->
+
+    <div class="container">
+
+
+        <!-- WELCOME -->
+
+        <div class="welcome">
+
+            <h1>Admin Dashboard 👨‍💻</h1>
+
+            <p>
+                Welcome to QuizMaster Admin Panel.
+                Here you can manage your quiz system.
+            </p>
+
+        </div>
+
+
+
+        <!-- ================= STATISTICS ================= -->
+
+        <div class="cards">
+
+
+            <!-- USERS -->
+
+            <div class="card">
+
+                <h2>{{ total_users }}</h2>
+
+                <p>
+                    Total Users
+                </p>
+
+            </div>
+
+
+
+            <!-- QUESTIONS -->
+
+            <div class="card">
+
+                <h2>{{ total_questions }}</h2>
+
+                <p>
+                    Total Questions
+                </p>
+
+            </div>
+
+
+
+            <!-- RESULTS -->
+
+            <div class="card">
+
+                <h2>{{ total_results }}</h2>
+
+                <p>
+                    Quiz Attempts
+                </p>
+
+            </div>
+
+
+        </div>
+
+
+
+        <!-- ================= ADMIN ACTIONS ================= -->
+
+        <div class="actions">
+
+            <h2>Admin Actions</h2>
+
+
+            <a href="{{ url_for('admin_settings') }}"
+               class="btn settings">
+
+                ⚙️ Admin Settings
+
+            </a>
+
+
+            <a href="{{ url_for('home') }}"
+               class="btn">
+
+                🏠 Visit Website
+
+            </a>
+
+        </div>
+
+
+    </div>
+
+
+</body>
+</html>

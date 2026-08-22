@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Admin Login - QuizMaster</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+
+<!-- ================= ADMIN LOGIN ================= -->
+
+<section class="login-section">
+
+    <div class="login-card">
+
+
+        <!-- ICON -->
+
+        <div class="admin-icon">
+            🛡️
+        </div>
+
+
+        <!-- TITLE -->
+
+        <p class="small-heading">
+            QUIZMASTER ADMIN
+        </p>
+
+        <h1>
+            Admin Login
+        </h1>
+
+        <p>
+            Login to manage your QuizMaster portal.
+        </p>
+
+
+        <!-- ERROR MESSAGE -->
+
+        {% if error %}
+
+        <div class="error-message">
+
+            {{ error }}
+
+        </div>
+
+        {% endif %}
+
+
+        <!-- LOGIN FORM -->
+
+        <form method="POST">
+
+
+            <!-- USERNAME -->
+
+            <div class="form-group">
+
+                <label for="username">
+                    Admin Username
+                </label>
+
+                <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    placeholder="Enter admin username"
+                    required
+                >
+
+            </div>
+
+
+            <!-- PASSWORD -->
+
+            <div class="form-group">
+
+                <label for="password">
+                    Password
+                </label>
+
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Enter admin password"
+                    required
+                >
+
+            </div>
+
+
+            <!-- LOGIN BUTTON -->
+
+            <button
+                type="submit"
+                class="login-btn">
+
+                🛡️ Login as Admin
+
+            </button>
+
+
+        </form>
+
+
+        <!-- BACK TO HOME -->
+
+        <a
+            href="{{ url_for('home') }}"
+            class="back-home">
+
+            ← Back to Home
+
+        </a>
+
+
+    </div>
+
+</section>
+
+
+</body>
+
+</html>

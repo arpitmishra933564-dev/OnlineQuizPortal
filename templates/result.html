@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Quiz Result - QuizMaster</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+    <!-- NAVBAR -->
+
+    <header>
+
+        <nav class="navbar">
+
+            <div class="logo">
+                Quiz<span>Master</span>
+            </div>
+
+            <ul class="nav-links">
+
+                <li>
+                    <a href="{{ url_for('home') }}">
+                        Home
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ url_for('dashboard') }}">
+                        Dashboard
+                    </a>
+                </li>
+
+                <li>
+                    <a href="{{ url_for('logout') }}">
+                        Logout
+                    </a>
+                </li>
+
+            </ul>
+
+        </nav>
+
+    </header>
+
+
+    <!-- RESULT -->
+
+    <section class="result-section">
+
+        <div class="result-card">
+
+            <p class="small-heading">
+                QUIZMASTER RESULT
+            </p>
+
+            <h1>
+                🎉 Quiz Completed!
+            </h1>
+
+            <h2>
+                {{ category }}
+            </h2>
+
+
+            <!-- SCORE -->
+
+            <div class="score-box">
+
+                <p>
+                    Your Score
+                </p>
+
+                <strong>
+                    {{ score }} / {{ total }}
+                </strong>
+
+            </div>
+
+
+            <!-- PERCENTAGE -->
+
+            {% if total > 0 %}
+
+                <h2 class="percentage">
+
+                    {{ ((score / total) * 100) | round(0) }}%
+
+                </h2>
+
+            {% endif %}
+
+
+            <!-- MESSAGE -->
+
+            {% if score == total %}
+
+                <p class="result-message">
+                    🏆 Excellent! Perfect Score!
+                </p>
+
+            {% elif score >= total / 2 %}
+
+                <p class="result-message">
+                    👍 Good Job! Keep practicing.
+                </p>
+
+            {% else %}
+
+                <p class="result-message">
+                    💪 Don't give up! Practice more.
+                </p>
+
+            {% endif %}
+
+
+            <!-- BUTTONS -->
+
+            <div class="result-buttons">
+
+                <a
+                    href="{{ url_for('quiz', category=category) }}"
+                    class="dashboard-btn">
+
+                    Try Again
+
+                </a>
+
+
+                <a
+                    href="{{ url_for('dashboard') }}"
+                    class="dashboard-btn">
+
+                    Choose Another Quiz
+
+                </a>
+
+            </div>
+
+
+        </div>
+
+    </section>
+
+</body>
+
+</html>
