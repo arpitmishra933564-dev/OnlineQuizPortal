@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Edit Question - QuizMaster</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+    <style>
+
+        .edit-container {
+            max-width: 700px;
+            margin: 50px auto;
+            padding: 35px;
+            border-radius: 18px;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .edit-container h2 {
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+
+            width: 100%;
+            padding: 12px;
+
+            border-radius: 8px;
+            border: 1px solid #444;
+
+            background: rgba(255,255,255,0.08);
+            color: white;
+
+            font-size: 15px;
+
+            box-sizing: border-box;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+        }
+
+        .update-btn {
+
+            padding: 12px 25px;
+
+            border: none;
+            border-radius: 8px;
+
+            background: #6c63ff;
+            color: white;
+
+            font-size: 16px;
+            font-weight: bold;
+
+            cursor: pointer;
+        }
+
+        .back-btn {
+
+            display: inline-block;
+
+            margin-left: 10px;
+
+            padding: 12px 25px;
+
+            border-radius: 8px;
+
+            text-decoration: none;
+
+            background: #444;
+            color: white;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+
+<header>
+
+    <nav class="navbar">
+
+        <div class="logo">
+            Quiz<span>Master</span>
+        </div>
+
+        <ul class="nav-links">
+
+            <li>
+                <a href="{{ url_for('admin_dashboard') }}">
+                    Dashboard
+                </a>
+            </li>
+
+            <li>
+                <a href="{{ url_for('manage_questions') }}">
+                    Questions
+                </a>
+            </li>
+
+            <li>
+                <a href="{{ url_for('admin_logout') }}">
+                    Logout
+                </a>
+            </li>
+
+        </ul>
+
+    </nav>
+
+</header>
+
+
+<div class="edit-container">
+
+    <p class="small-heading">
+        ADMIN PANEL
+    </p>
+
+    <h2>
+        Edit <span>Question</span>
+    </h2>
+
+
+    <form method="POST">
+
+
+        <!-- CATEGORY -->
+
+        <div class="form-group">
+
+            <label>
+                Category
+            </label>
+
+            <select name="category" required>
+
+                <option
+                    value="Programming"
+                    {% if question["category"] == "Programming" %}
+                    selected
+                    {% endif %}>
+
+                    Programming
+
+                </option>
+
+
+                <option
+                    value="Data Structures"
+                    {% if question["category"] == "Data Structures" %}
+                    selected
+                    {% endif %}>
+
+                    Data Structures
+
+                </option>
+
+
+                <option
+                    value="Web Development"
+                    {% if question["category"] == "Web Development" %}
+                    selected
+                    {% endif %}>
+
+                    Web Development
+
+                </option>
+
+
+                <option
+                    value="Aptitude"
+                    {% if question["category"] == "Aptitude" %}
+                    selected
+                    {% endif %}>
+
+                    Aptitude
+
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- QUESTION -->
+
+        <div class="form-group">
+
+            <label>
+                Question
+            </label>
+
+            <textarea
+                name="question"
+                rows="4"
+                required>{{ question["question"] }}</textarea>
+
+        </div>
+
+
+        <!-- OPTION A -->
+
+        <div class="form-group">
+
+            <label>
+                Option A
+            </label>
+
+            <input
+                type="text"
+                name="option_a"
+                value="{{ question['option_a'] }}"
+                required>
+
+        </div>
+
+
+        <!-- OPTION B -->
+
+        <div class="form-group">
+
+            <label>
+                Option B
+            </label>
+
+            <input
+                type="text"
+                name="option_b"
+                value="{{ question['option_b'] }}"
+                required>
+
+        </div>
+
+
+        <!-- OPTION C -->
+
+        <div class="form-group">
+
+            <label>
+                Option C
+            </label>
+
+            <input
+                type="text"
+                name="option_c"
+                value="{{ question['option_c'] }}"
+                required>
+
+        </div>
+
+
+        <!-- OPTION D -->
+
+        <div class="form-group">
+
+            <label>
+                Option D
+            </label>
+
+            <input
+                type="text"
+                name="option_d"
+                value="{{ question['option_d'] }}"
+                required>
+
+        </div>
+
+
+        <!-- CORRECT ANSWER -->
+
+        <div class="form-group">
+
+            <label>
+                Correct Answer
+            </label>
+
+            <select
+                name="correct_answer"
+                required>
+
+                <option
+                    value="A"
+                    {% if question["correct_answer"] == "A" %}
+                    selected
+                    {% endif %}>
+
+                    A
+
+                </option>
+
+
+                <option
+                    value="B"
+                    {% if question["correct_answer"] == "B" %}
+                    selected
+                    {% endif %}>
+
+                    B
+
+                </option>
+
+
+                <option
+                    value="C"
+                    {% if question["correct_answer"] == "C" %}
+                    selected
+                    {% endif %}>
+
+                    C
+
+                </option>
+
+
+                <option
+                    value="D"
+                    {% if question["correct_answer"] == "D" %}
+                    selected
+                    {% endif %}>
+
+                    D
+
+                </option>
+
+            </select>
+
+        </div>
+
+
+        <!-- BUTTONS -->
+
+        <button
+            type="submit"
+            class="update-btn">
+
+            💾 Update Question
+
+        </button>
+
+
+        <a
+            href="{{ url_for('manage_questions') }}"
+            class="back-btn">
+
+            ← Back
+
+        </a>
+
+
+    </form>
+
+</div>
+
+
+</body>
+
+</html>

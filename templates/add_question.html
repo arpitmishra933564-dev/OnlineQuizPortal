@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <title>Add Question - QuizMaster</title>
+
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<header>
+
+    <nav class="navbar">
+
+        <div class="logo">
+            Quiz<span>Master</span>
+        </div>
+
+        <ul class="nav-links">
+
+            <li>
+                <a href="{{ url_for('manage_questions') }}">
+                    Questions
+                </a>
+            </li>
+
+            <li>
+                <a href="{{ url_for('admin_dashboard') }}">
+                    Dashboard
+                </a>
+            </li>
+
+        </ul>
+
+    </nav>
+
+</header>
+
+
+<section class="about">
+
+    <div>
+
+        <p class="small-heading">
+            ADMIN PANEL
+        </p>
+
+        <h2>
+            Add New <span>Question</span>
+        </h2>
+
+        <p>
+            Create a question for your quiz category.
+        </p>
+
+
+        <form method="POST">
+
+            <div class="form-group">
+
+                <label>
+                    Category
+                </label>
+
+                <select name="category" required>
+
+                    <option value="">
+                        Select Category
+                    </option>
+
+                    <option value="Programming">
+                        Programming
+                    </option>
+
+                    <option value="Data Structures">
+                        Data Structures
+                    </option>
+
+                    <option value="Web Development">
+                        Web Development
+                    </option>
+
+                    <option value="Aptitude">
+                        Aptitude
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Question
+                </label>
+
+                <textarea
+                    name="question"
+                    rows="4"
+                    placeholder="Enter question"
+                    required></textarea>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Option A
+                </label>
+
+                <input
+                    type="text"
+                    name="option_a"
+                    required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Option B
+                </label>
+
+                <input
+                    type="text"
+                    name="option_b"
+                    required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Option C
+                </label>
+
+                <input
+                    type="text"
+                    name="option_c"
+                    required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Option D
+                </label>
+
+                <input
+                    type="text"
+                    name="option_d"
+                    required>
+
+            </div>
+
+
+            <div class="form-group">
+
+                <label>
+                    Correct Answer
+                </label>
+
+                <select name="correct_answer" required>
+
+                    <option value="">
+                        Select Correct Answer
+                    </option>
+
+                    <option value="A">
+                        A
+                    </option>
+
+                    <option value="B">
+                        B
+                    </option>
+
+                    <option value="C">
+                        C
+                    </option>
+
+                    <option value="D">
+                        D
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <button
+                type="submit"
+                class="login-btn">
+
+                Add Question →
+
+            </button>
+
+        </form>
+
+    </div>
+
+</section>
+
+
+</body>
+
+</html>

@@ -8,14 +8,299 @@
     <meta name="viewport"
           content="width=device-width, initial-scale=1.0">
 
-    <title>Login - QuizMaster</title>
+    <title>Student Login - QuizMaster</title>
 
     <link rel="stylesheet"
           href="{{ url_for('static', filename='style.css') }}">
 
+    <style>
+
+        /* ================================
+           LOGIN PAGE
+        ================================= */
+
+        .login-container {
+            min-height: 80vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            padding: 50px 20px;
+        }
+
+
+        .login-card {
+
+            width: 100%;
+            max-width: 430px;
+
+            background: white;
+
+            padding: 40px;
+
+            border-radius: 20px;
+
+            box-shadow:
+                0 10px 35px rgba(0, 0, 0, 0.10);
+        }
+
+
+        .login-icon {
+
+            width: 70px;
+            height: 70px;
+
+            margin: 0 auto 20px;
+
+            border-radius: 50%;
+
+            background: #f0efff;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+
+            font-size: 32px;
+        }
+
+
+        .login-card h1 {
+
+            text-align: center;
+
+            color: #182848;
+
+            margin-bottom: 10px;
+        }
+
+
+        .login-subtitle {
+
+            text-align: center;
+
+            color: #777;
+
+            margin-bottom: 30px;
+        }
+
+
+        /* ================================
+           FORM
+        ================================= */
+
+        .form-group {
+
+            margin-bottom: 20px;
+        }
+
+
+        .form-group label {
+
+            display: block;
+
+            margin-bottom: 8px;
+
+            font-weight: 600;
+
+            color: #333;
+        }
+
+
+        .form-group input {
+
+            width: 100%;
+
+            padding: 13px 14px;
+
+            border: 1px solid #ddd;
+
+            border-radius: 10px;
+
+            outline: none;
+
+            font-size: 15px;
+
+            box-sizing: border-box;
+
+            transition: 0.3s;
+        }
+
+
+        .form-group input:focus {
+
+            border-color: #6c63ff;
+
+            box-shadow:
+                0 0 0 3px rgba(108, 99, 255, 0.10);
+        }
+
+
+        /* ================================
+           LOGIN BUTTON
+        ================================= */
+
+        .login-btn {
+
+            width: 100%;
+
+            padding: 14px;
+
+            border: none;
+
+            border-radius: 10px;
+
+            background: #6c63ff;
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.3s;
+        }
+
+
+        .login-btn:hover {
+
+            background: #554cff;
+
+            transform: translateY(-1px);
+
+            box-shadow:
+                0 8px 20px rgba(108, 99, 255, 0.25);
+        }
+
+
+        /* ================================
+           FORGOT PASSWORD
+        ================================= */
+
+        .forgot-password {
+
+            text-align: right;
+
+            margin-top: 10px;
+
+            margin-bottom: 20px;
+        }
+
+
+        .forgot-password a {
+
+            color: #6c63ff;
+
+            text-decoration: none;
+
+            font-size: 14px;
+
+            font-weight: 600;
+        }
+
+
+        .forgot-password a:hover {
+
+            text-decoration: underline;
+        }
+
+
+        /* ================================
+           ERROR MESSAGE
+        ================================= */
+
+        .error-message {
+
+            background: #ffecec;
+
+            color: #d63031;
+
+            padding: 12px 15px;
+
+            border-radius: 8px;
+
+            margin-bottom: 20px;
+
+            text-align: center;
+
+            font-size: 14px;
+        }
+
+
+        /* ================================
+           REGISTER LINK
+        ================================= */
+
+        .register-link {
+
+            text-align: center;
+
+            margin-top: 25px;
+
+            color: #777;
+        }
+
+
+        .register-link a {
+
+            color: #6c63ff;
+
+            text-decoration: none;
+
+            font-weight: 600;
+        }
+
+
+        .register-link a:hover {
+
+            text-decoration: underline;
+        }
+
+
+        /* ================================
+           ADMIN LOGIN
+        ================================= */
+
+        .admin-login {
+
+            text-align: center;
+
+            margin-top: 25px;
+
+            padding-top: 20px;
+
+            border-top: 1px solid #eee;
+        }
+
+
+        .admin-login a {
+
+            color: #555;
+
+            text-decoration: none;
+
+            font-size: 14px;
+        }
+
+
+        .admin-login a:hover {
+
+            color: #6c63ff;
+        }
+
+    </style>
+
 </head>
 
+
 <body>
+
+
+<!-- ================================
+     NAVBAR
+================================= -->
 
 <header>
 
@@ -25,6 +310,7 @@
             Quiz<span>Master</span>
         </div>
 
+
         <ul class="nav-links">
 
             <li>
@@ -32,6 +318,14 @@
                     Home
                 </a>
             </li>
+
+
+            <li>
+                <a href="{{ url_for('login') }}">
+                    Student Login
+                </a>
+            </li>
+
 
             <li>
                 <a href="{{ url_for('register') }}">
@@ -46,82 +340,173 @@
 </header>
 
 
-<section class="auth-section">
+<!-- ================================
+     LOGIN
+================================= -->
 
-    <div class="auth-card">
+<main class="login-container">
 
-        <div class="auth-icon">
-            🔐
+
+    <div class="login-card">
+
+
+        <div class="login-icon">
+            🎓
         </div>
 
+
         <h1>
-            Welcome Back
+            Student Login
         </h1>
 
-        <p>
-            Login to continue your quiz journey.
+
+        <p class="login-subtitle">
+            Login to continue your QuizMaster journey
         </p>
 
 
-        <form method="POST"
-              action="{{ url_for('login') }}">
+        <!-- ERROR -->
 
+        {% if error %}
+
+        <div class="error-message">
+
+            {{ error }}
+
+        </div>
+
+        {% endif %}
+
+
+        <!-- LOGIN FORM -->
+
+        <form
+            method="POST"
+            action="{{ url_for('login') }}"
+        >
+
+
+            <!-- EMAIL -->
 
             <div class="form-group">
 
-                <label>
+                <label for="email">
                     Email Address
                 </label>
 
+
                 <input
                     type="email"
+                    id="email"
                     name="email"
                     placeholder="Enter your email"
+                    autocomplete="email"
                     required
                 >
 
             </div>
 
+
+            <!-- PASSWORD -->
 
             <div class="form-group">
 
-                <label>
+                <label for="password">
                     Password
                 </label>
 
+
                 <input
                     type="password"
+                    id="password"
                     name="password"
                     placeholder="Enter your password"
+                    autocomplete="current-password"
                     required
                 >
 
             </div>
 
 
-            <button type="submit"
-                    class="auth-btn">
+            <!-- FORGOT PASSWORD -->
 
-                Login
+            <div class="forgot-password">
+
+                <a href="{{ url_for('forgot_password') }}">
+
+                    Forgot Password?
+
+                </a>
+
+            </div>
+
+
+            <!-- LOGIN BUTTON -->
+
+            <button
+                type="submit"
+                class="login-btn"
+            >
+
+                Login →
 
             </button>
+
 
         </form>
 
 
-        <p class="auth-footer">
+        <!-- REGISTER -->
+
+        <div class="register-link">
 
             Don't have an account?
 
             <a href="{{ url_for('register') }}">
+
                 Create Account
+
             </a>
 
-        </p>
+        </div>
+
+
+        <!-- ADMIN -->
+
+        <div class="admin-login">
+
+            <a href="{{ url_for('admin_login') }}">
+
+                🔐 Admin Login
+
+            </a>
+
+        </div>
+
 
     </div>
 
-</section>
+
+</main>
+
+
+<!-- ================================
+     FOOTER
+================================= -->
+
+<footer>
+
+    <div class="logo">
+        Quiz<span>Master</span>
+    </div>
+
+
+    <p>
+        © 2026 QuizMaster. All Rights Reserved.
+    </p>
+
+</footer>
+
 
 </body>
 
