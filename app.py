@@ -1,5 +1,6 @@
 from flask import Flask, render_template, request, redirect, url_for, session
 import sqlite3
+import os
 from werkzeug.security import generate_password_hash, check_password_hash
 
 app = Flask(__name__)
@@ -10,7 +11,14 @@ app = Flask(__name__)
 
 app.secret_key = "quizmaster_secret_key_2026"
 
-DATABASE = "quiz.db"
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+DATABASE = os.environ.get("QUIZ_DATABASE_PATH")
+if DATABASE is None:
+    DATABASE = (
+        "/tmp/quiz.db"
+        if os.environ.get("VERCEL") == "1"
+        else os.path.join(BASE_DIR, "quiz.db")
+    )
 
 
 # =========================================================
@@ -18,7 +26,11 @@ DATABASE = "quiz.db"
 # =========================================================
 
 def get_db():
-    conn = sqlite3.connect(DATABASE)
+    database_dir = os.path.dirname(DATABASE)
+    if database_dir:
+        os.makedirs(database_dir, exist_ok=True)
+
+    conn = sqlite3.connect(DATABASE, timeout=10)
     conn.row_factory = sqlite3.Row
     return conn
 
@@ -52,9 +64,7 @@ def init_db():
         ).fetchall()
     ]
 
-    # IMPORTANT:
-    # Existing quiz.db may not have username column.
-    # Add it automatically.
+    # Add username column if old database doesn't have it
     if "username" not in user_columns:
 
         conn.execute("""
@@ -62,8 +72,6 @@ def init_db():
             ADD COLUMN username TEXT
         """)
 
-        # Existing students ke liye email ko username
-        # ke roop mein use karenge.
         conn.execute("""
             UPDATE users
             SET username = email
@@ -162,15 +170,18 @@ def register():
     if request.method == "POST":
 
         username = request.form.get(
-            "username", ""
+            "username",
+            ""
         ).strip()
 
         email = request.form.get(
-            "email", ""
+            "email",
+            ""
         ).strip()
 
         password = request.form.get(
-            "password", ""
+            "password",
+            ""
         )
 
         if not username or not email or not password:
@@ -227,11 +238,13 @@ def login():
     if request.method == "POST":
 
         email = request.form.get(
-            "email", ""
+            "email",
+            ""
         ).strip()
 
         password = request.form.get(
-            "password", ""
+            "password",
+            ""
         )
 
         conn = get_db()
@@ -1196,12 +1209,20 @@ def admin_logout():
 
 
 # =========================================================
+# INITIALIZE DATABASE
+# =========================================================
+
+# IMPORTANT:
+# This runs when Flask/Gunicorn starts.
+# Therefore Render can create the required tables.
+init_db()
+
+
+# =========================================================
 # RUN APPLICATION
 # =========================================================
 
 if __name__ == "__main__":
-
-    init_db()
 
     print()
     print("==========================================")
